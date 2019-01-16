@@ -327,8 +327,6 @@ def getDisplay(graphicsByDefault, options=None):
     return textDisplay.NullGraphics()
 
 
-
-
 if __name__ == '__main__':
     options = readCommand(sys.argv)
     if options.generateSolutions:

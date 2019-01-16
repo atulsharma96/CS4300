@@ -70,7 +70,8 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
+    return [s, s, w, s, w, w, s, w]
+
 
 def depthFirstSearch(problem):
     """
@@ -86,18 +87,68 @@ def depthFirstSearch(problem):
     print "Is the start a goal?", problem.isGoalState(problem.getStartState())
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    visited = list()
+    frontier_stack = util.Stack()
+    # to add some form of uniformity between the class and the implementation,
+    # I have included the cost field in my tuple, but it is only ever used
+    # by the UCS implementation.
+    cost = 0.0
+    frontier_stack.push((problem.getStartState(), list(), cost))
+    while not frontier_stack.isEmpty():
+        current_state, actions, cost_so_far = frontier_stack.pop()
+        for state, transition, cost in problem.getSuccessors(current_state):
+            if state not in visited:
+                if problem.isGoalState(state):
+                    actions += [transition]
+                    return actions
+                else:
+                    visited.append(current_state)
+                    frontier_stack.push((state, actions + [transition], cost))
+
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    visited = list()
+    frontier_queue = util.Queue()
+    # to add some form of uniformity between the class and the implementation,
+    # I have included the cost field in my tuple, but it is only ever used
+    # by the UCS implementation.
+    cost = 0.0
+    frontier_queue.push((problem.getStartState(), list(), cost))
+    while not frontier_queue.isEmpty():
+        current_state, actions, cost_so_far = frontier_queue.pop()
+        for state, transition, cost in problem.getSuccessors(current_state):
+            if state not in visited:
+                if problem.isGoalState(state):
+                    actions += [transition]
+                    return actions
+                else:
+                    visited.append(current_state)
+                    frontier_queue.push((state, actions + [transition], cost))
+
+
+
+    # util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    visited = list()
+    frontier_queue = util.PriorityQueue()
+    # to add some form of uniformity between the class and the implementation,
+    # I have included the cost field in my tuple, but it is only ever used
+    # by the UCS implementation.
+    cost = 0.0
+    frontier_queue.push((problem.getStartState(), list(), cost), cost)
+    while not frontier_queue.isEmpty():
+        current_state, actions, cost_so_far = frontier_queue.pop()
+        for state, transition, cost in problem.getSuccessors(current_state):
+            if state not in visited:
+                if problem.isGoalState(state):
+                    actions += [transition]
+                    return actions
+                else:
+                    visited.append(current_state)
+                    frontier_queue.push((state, actions + [transition], (cost_so_far+cost)), cost_so_far)
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -105,6 +156,7 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
+
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
