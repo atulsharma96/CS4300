@@ -96,14 +96,12 @@ def depthFirstSearch(problem):
     frontier_stack.push((problem.getStartState(), list(), cost))
     while not frontier_stack.isEmpty():
         current_state, actions, cost_so_far = frontier_stack.pop()
+        if problem.isGoalState(current_state):
+            return actions
         for state, transition, cost in problem.getSuccessors(current_state):
             if state not in visited:
-                if problem.isGoalState(state):
-                    actions += [transition]
-                    return actions
-                else:
-                    visited.append(current_state)
-                    frontier_stack.push((state, actions + [transition], cost))
+                visited.append(current_state)
+                frontier_stack.push((state, actions + [transition], cost))
 
 
 def breadthFirstSearch(problem):
