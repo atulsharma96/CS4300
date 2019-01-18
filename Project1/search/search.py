@@ -130,22 +130,21 @@ def breadthFirstSearch(problem):
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     visited = list()
+    willVisit = list()
     frontier_queue = util.PriorityQueue()
     # to add some form of uniformity between the class and the implementation,
     # I have included the cost field in my tuple, but it is only ever used
     # by the UCS implementation.
-    cost = 0.0
-    frontier_queue.push((problem.getStartState(), list(), cost), cost)
+    frontier_queue.push((problem.getStartState(), list(), 0.0), 0.0)
     while not frontier_queue.isEmpty():
         current_state, actions, cost_so_far = frontier_queue.pop()
+        if problem.isGoalState(current_state):
+            return actions
         for state, transition, cost in problem.getSuccessors(current_state):
-            if state not in visited:
-                if problem.isGoalState(state):
-                    actions += [transition]
-                    return actions
-                else:
-                    visited.append(current_state)
-                    frontier_queue.push((state, actions + [transition], (cost_so_far+cost)), cost_so_far)
+            if state not in visited and (state, cost + cost_so_far) not in willVisit:
+                frontier_queue.push((state, actions + [transition], cost+cost_so_far), cost_so_far+cost)
+                willVisit.append((state, cost + cost_so_far))
+        visited.append(current_state)
 
 
 def nullHeuristic(state, problem=None):
