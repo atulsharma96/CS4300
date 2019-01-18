@@ -106,6 +106,7 @@ def depthFirstSearch(problem):
 
 def breadthFirstSearch(problem):
     visited = list()
+    willVisit = list()
     frontier_queue = util.Queue()
     # to add some form of uniformity between the class and the implementation,
     # I have included the cost field in my tuple, but it is only ever used
@@ -114,14 +115,13 @@ def breadthFirstSearch(problem):
     frontier_queue.push((problem.getStartState(), list(), cost))
     while not frontier_queue.isEmpty():
         current_state, actions, cost_so_far = frontier_queue.pop()
+        if problem.isGoalState(current_state):
+            return actions
         for state, transition, cost in problem.getSuccessors(current_state):
-            if state not in visited:
-                if problem.isGoalState(state):
-                    actions += [transition]
-                    return actions
-                else:
-                    visited.append(current_state)
-                    frontier_queue.push((state, actions + [transition], cost))
+            if state not in visited and state not in willVisit:
+                frontier_queue.push((state, actions + [transition], cost))
+                willVisit.append(state)
+        visited.append(current_state)
 
 
 
