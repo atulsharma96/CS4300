@@ -288,6 +288,14 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
+        self.visited = list()
+        self.corner_start_states = list()
+        for corner in self.corners:
+            if self.startingPosition == corner:
+                self.corner_start_states.append((corner, False))
+            else:
+                self.corner_start_states.append((corner, True))
+        self.corner_start_states = tuple(self.corner_start_states)
 
     def getStartState(self):
         """
@@ -295,14 +303,21 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined(
+        start_state = (self.startingPosition[0], self.startingPosition[1], self.corner_start_states)
+        return start_state
 
     def isGoalState(self, state):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # util.raiseNotDefined()
+        for corner in state[2]:
+            contains_food = corner[1]
+            if contains_food:
+                return False
+        return True
 
     def getSuccessors(self, state):
         """
@@ -325,6 +340,25 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            x = state[0]
+            y = state[1]
+            goal = state[2]
+            directions = Actions.directionToVector(action)
+            predicted_x = int(x+directions[0])
+            predicted_y = int(y+directions[1])
+            if not self.walls[predicted_x][predicted_y]:
+                next_node = (predicted_x, predicted_y)
+                new_goal = list()
+                for corner in goal:
+                    loc = corner[0]
+                    contains_food = corner[1]
+                if next_node == loc:
+                    new_goal.append((loc, False))
+                else:
+                    new_goal.append((loc, contains_food))
+                new_goal = tuple(new_goal)
+                cost = 1
+                successors.append(((next_node[0], next_node[1], new_goal), action, cost))
 
         self._expanded += 1 # DO NOT CHANGE
         return successors

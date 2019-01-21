@@ -169,7 +169,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             if state not in visited:
                 frontier_queue.push((state, actions + [transition]), cost + problem.getCostOfActions(actions))
         visited.append(current_state)
-    # util.raiseNotDefined()
 
 
 # Abbreviations
