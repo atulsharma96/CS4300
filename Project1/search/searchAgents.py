@@ -298,14 +298,14 @@ class CornersProblem(search.SearchProblem):
         self.corner_start_states = tuple(self.corner_start_states)
 
     def getStartState(self):
-        """
-        Returns the start state (in your state space, not the full Pacman state
-        space)
-        """
-        "*** YOUR CODE HERE ***"
-        # util.raiseNotDefined(
-        start_state = (self.startingPosition[0], self.startingPosition[1], self.corner_start_states)
-        return start_state
+        # """
+        # Returns the start state (in your state space, not the full Pacman state
+        # space)
+        # """
+        # "*** YOUR CODE HERE ***"
+        # # util.raiseNotDefined(
+        return self.startingPosition[0], self.startingPosition[1], self.corner_start_states
+        # return self.startingPosition[0], self.startingPosition[1], self.cornersStartState
 
     def isGoalState(self, state):
         """
@@ -348,19 +348,19 @@ class CornersProblem(search.SearchProblem):
             predicted_y = int(y+directions[1])
             if not self.walls[predicted_x][predicted_y]:
                 next_node = (predicted_x, predicted_y)
-                new_goal = list()
+                new_goal = []
                 for corner in goal:
                     loc = corner[0]
                     contains_food = corner[1]
-                if next_node == loc:
-                    new_goal.append((loc, False))
-                else:
-                    new_goal.append((loc, contains_food))
+                    if next_node == loc:
+                        new_goal.append((loc, False))
+                    else:
+                        new_goal.append((loc, contains_food))
                 new_goal = tuple(new_goal)
                 cost = 1
                 successors.append(((next_node[0], next_node[1], new_goal), action, cost))
 
-        self._expanded += 1 # DO NOT CHANGE
+        self._expanded += 1  # DO NOT CHANGE
         return successors
 
     def getCostOfActions(self, actions):
@@ -552,7 +552,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         The state is Pacman's position. Fill this in with a goal test that will
         complete the problem definition.
         """
-        x,y = state
+        x, y = state
 
         "*** YOUR CODE HERE ***"
         util.raiseNotDefined()
