@@ -412,16 +412,18 @@ def cornersHeuristic(state, problem):
             distance = curr_dist
     number_of_corners = len(corners)
 
-    # covering an edge case (what if we only covered corners)
+    # If we can't find a food filled box, there is no "goal" per se, so return 0.
     if number_of_corners == food_counter:
-        return 0
+        return 0.0
     return distance
+
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
     def __init__(self):
         self.searchFunction = lambda prob: search.aStarSearch(prob, cornersHeuristic)
         self.searchType = CornersProblem
+
 
 class FoodSearchProblem:
     """
@@ -509,7 +511,19 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    distance = 0.0
+    foodGridList = foodGrid.asList()
+    if len(foodGridList) == 0:
+        return 0
+    for foodlocation in foodGridList:
+
+        # curr_distance = ((foodlocation[0]-position[0])**2+(foodlocation[1]-position[1])**2)**0.5
+
+        # use maze steps as a heuristic, takes MUUUUCH longer than other distance calculation, obviously...
+        curr_distance = mazeDistance(foodlocation, position, problem.startingGameState)
+        if curr_distance > distance:
+            distance = curr_distance
+    return distance
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
