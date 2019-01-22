@@ -394,9 +394,28 @@ def cornersHeuristic(state, problem):
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
     "*** YOUR CODE HERE ***"
-    actions = search.astar(problem)
-    cost = problem.getCostOfActions(actions)
-    return cost
+    corner_list = state[2]
+    distance = 0.0
+    food_counter = 0.0
+    for corner in corner_list:
+        location = corner[0]
+        food = corner[1]
+        if not food:
+            food_counter += 1.0
+            continue
+        # We find the Euclidean distance
+        # curr_dist = (abs(location[0]-state[0])**2+abs(location[1]-state[1])**2)**0.5
+
+        # Manhattan distance works better for some reason
+        curr_dist = abs(location[0] - state[0]) + abs(location[1] - state[1])
+        if curr_dist > distance:
+            distance = curr_dist
+    number_of_corners = len(corners)
+
+    # covering an edge case (what if we only covered corners)
+    if number_of_corners == food_counter:
+        return 0
+    return distance
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
