@@ -75,6 +75,8 @@ class ReflexAgent(Agent):
 
         "*** YOUR CODE HERE ***"
 
+        if successorGameState.isWin():
+            return float("inf")
 
         allFoodAsList = currentGameState.getFood().asList()
         currentPositionAsList = list(successorGameState.getPacmanPosition())
