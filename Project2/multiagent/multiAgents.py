@@ -147,37 +147,39 @@ class MinimaxAgent(MultiAgentSearchAgent):
           gameState.getNumAgents():
             Returns the total number of agents in the game
         """
-        bestAction, score = self.minimax(gameState, self.depth, True, 0)
+        self.numOfAgents = gameState.getNumAgents()
+        bestAction, score = self.minimax(gameState, self.depth, 0)
         return bestAction
 
-    def minimax(self, gameState, depth, maximizingPlayer, agentIndex):
-        legalMoves = gameState.getLegalActions()
+    def minimax(self, gameState, depth, agentIndex):
+        legalMoves = gameState.getLegalActions(agentIndex)
         if depth == 0 or len(legalMoves) == 0:
-            return None, gameState.getScore()
+            return None, self.evaluationFunction(gameState)
 
-        agentIndex += 1
-        if agentIndex == gameState.getNumAgents():
-            depth -= 1
-            agentIndex = 0
+        indexNextAgent = (agentIndex + 1) % self.numOfAgents  # Normalize the value of the index to stay in range
+        depthNextAgent = depth
 
-        if maximizingPlayer:
-            value = float("-inf")
-            newAction = None
+        if indexNextAgent == 0:
+            depthNextAgent -= 1
+
+        newAction = None
+
+        if agentIndex == 0:
+            valToReturn = float("-inf")
             for action in legalMoves:
-                oldAction, newValue = self.minimax(gameState.generateSuccessor(self.index,action), depth, agentIndex == self.index, agentIndex)
-                value = max(value, newValue)
-                if newValue == value:
+                oldAction, newValue = self.minimax(gameState.generateSuccessor(agentIndex, action), depthNextAgent, indexNextAgent)
+                valToReturn = max(newValue, valToReturn)
+                if newValue == valToReturn:
                     newAction = action
-            return newAction, value
+            return newAction, valToReturn
         else:
-            value = float("inf")
-            newAction = None
+            valToReturn = float("inf")
             for action in legalMoves:
-                oldAction, newValue = self.minimax(gameState.generateSuccessor(self.index,action), depth, agentIndex == self.index, agentIndex)
-                value = min(value, newValue)
-                if newValue == value:
+                oldAction, newValue = self.minimax(gameState.generateSuccessor(agentIndex, action), depthNextAgent, indexNextAgent)
+                valToReturn = min(newValue, valToReturn)
+                if newValue == valToReturn:
                     newAction = action
-            return newAction, value
+            return newAction, valToReturn
 
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
