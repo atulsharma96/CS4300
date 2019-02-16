@@ -291,7 +291,7 @@ def betterEvaluationFunction(currentGameState):
       evaluation function (question 5).
 
       DESCRIPTION: The current point system incentivizes running away from
-      active ghosts. We assign points based on the distance from the closest
+      ALL ghosts. We assign points based on the distance from the closest
       capsule and the closest food as well. We add 1 to act as a tie breaker
       in case pacman gets situated in an equidistant location from
       two food pellets.
