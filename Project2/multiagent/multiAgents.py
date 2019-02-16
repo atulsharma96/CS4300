@@ -77,6 +77,8 @@ class ReflexAgent(Agent):
 
         if successorGameState.isWin():
             return float("inf")
+        if successorGameState.isLose():
+            return float("-inf")
 
         allFoodAsList = currentGameState.getFood().asList()
         currentPositionAsList = list(successorGameState.getPacmanPosition())
@@ -291,7 +293,58 @@ def betterEvaluationFunction(currentGameState):
       DESCRIPTION: <write something here so we know what you did>
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    CONSTANT_FOR_DECREMENTING_FACTOR = 5
+    CONSTANT_FOR_INCREMENTING_FACTOR = 5
+    CONSTANT_TO_CONSIDER_GHOSTS_MORE_SERIOUSLY = 3
+
+    currentPosition = currentGameState.getPacmanPosition()
+    allFoodAsList = currentGameState.getFood().asList()
+    allCapsulesAsList = currentGameState.getCapsules()
+    allGhostStates = currentGameState.getGhostStates()
+    allScaredTimes = [ghostState.scaredTimer for ghostState in allGhostStates]
+    score = currentGameState.getScore()
+
+    if currentGameState.isWin():
+        return float("inf")
+    if currentGameState.isLose():
+        return float("-inf")
+
+    # The ideal score should be
+    # some tradeoff between food, ghosts
+    # and booster capsules.
+
+    closestFood = float("inf")
+    closestCapsule = float("inf")
+    closestGhost = float("inf")
+
+    for food in allFoodAsList:
+        distanceOfFood = manhattanDistance(food, currentPosition)
+        if distanceOfFood < closestFood:
+            closestFood = distanceOfFood
+
+    # we do this decrement to always give food a high priority
+    score -= closestFood
+
+    for capsule in allCapsulesAsList:
+        distanceOfCapsule = manhattanDistance(capsule, currentPosition)
+        if distanceOfCapsule < closestCapsule:
+            closestCapsule = distanceOfCapsule
+
+    for ghost in allGhostStates:
+        distanceOfGhost = manhattanDistance(ghost.getPosition(), currentPosition)
+        if distanceOfGhost < closestGhost:
+            closestGhost = distanceOfGhost
+
+    if closestGhost < CONSTANT_TO_CONSIDER_GHOSTS_MORE_SERIOUSLY:
+            if closestCapsule != 0 and closestGhost > closestCapsule:
+                distanceToReturn = (score+1/(CONSTANT_FOR_DECREMENTING_FACTOR*closestCapsule))
+            else:
+                distanceToReturn = score + CONSTANT_FOR_INCREMENTING_FACTOR*closestGhost
+    else:
+        distanceToReturn = score
+
+    return distanceToReturn
 
 # Abbreviation
 better = betterEvaluationFunction
