@@ -290,7 +290,11 @@ def betterEvaluationFunction(currentGameState):
       Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
       evaluation function (question 5).
 
-      DESCRIPTION: <write something here so we know what you did>
+      DESCRIPTION: The current point system incentivizes running away from
+      active ghosts. We assign points based on the distance from the closest
+      capsule and the closest food as well. We add 1 to act as a tie breaker
+      in case pacman gets situated in an equidistant location from
+      two food pellets.
     """
     "*** YOUR CODE HERE ***"
 
@@ -337,10 +341,10 @@ def betterEvaluationFunction(currentGameState):
             closestGhost = distanceOfGhost
 
     if closestGhost < CONSTANT_TO_CONSIDER_GHOSTS_MORE_SERIOUSLY:
-            if closestCapsule != 0 and closestGhost > closestCapsule:
-                distanceToReturn = (score+1/(CONSTANT_FOR_DECREMENTING_FACTOR*closestCapsule))
-            else:
-                distanceToReturn = score + CONSTANT_FOR_INCREMENTING_FACTOR*closestGhost
+        if closestCapsule != 0 and closestGhost > closestCapsule:
+            distanceToReturn = (score + 1 / (CONSTANT_FOR_DECREMENTING_FACTOR * closestCapsule))
+        else:
+            distanceToReturn = score + CONSTANT_FOR_INCREMENTING_FACTOR * closestGhost
     else:
         distanceToReturn = score
 
