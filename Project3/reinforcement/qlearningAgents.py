@@ -42,6 +42,8 @@ class QLearningAgent(ReinforcementAgent):
         "You can initialize Q-values here..."
         ReinforcementAgent.__init__(self, **args)
         "*** YOUR CODE HERE ***"
+        # my understanding is that util.Counter is a sort of dict
+        # the underlying data structure is definitely a dict
         self.values = util.Counter()
 
     def getQValue(self, state, action):
@@ -102,6 +104,7 @@ class QLearningAgent(ReinforcementAgent):
         legalActions = self.getLegalActions(state)
         action = None
         "*** YOUR CODE HERE ***"
+        # pretty much says to do this in the assignment spec
         if util.flipCoin(self.epsilon):
             return random.choice(legalActions)
 

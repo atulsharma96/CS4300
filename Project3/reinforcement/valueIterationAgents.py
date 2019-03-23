@@ -76,6 +76,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         """
         "*** YOUR CODE HERE ***"
         q_val = 0
+        # From slides
         for s_prime, prob in self.mdp.getTransitionStatesAndProbs(state, action):
             reward = self.mdp.getReward(state, action, s_prime)
             q_val += prob*(reward+self.discount*self.values[s_prime])

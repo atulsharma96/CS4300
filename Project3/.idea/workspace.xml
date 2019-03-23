@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e567573e-a7d5-4ef7-ad11-20f4d88151d4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reinforcement/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/reinforcement/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reinforcement/qlearningAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/reinforcement/qlearningAgents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reinforcement/valueIterationAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/reinforcement/valueIterationAgents.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,15 +12,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Project3$autograder.coverage" NAME="autograder Coverage Results" MODIFIED="1553305171829" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reinforcement" />
+    <SUITE FILE_PATH="coverage/Project3$autograder.coverage" NAME="autograder Coverage Results" MODIFIED="1553305896804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reinforcement" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reinforcement/qlearningAgents.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
+            <state relative-caret-position="220">
+              <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
               <folding>
                 <element signature="e#668#686#0" expanded="true" />
               </folding>
@@ -42,8 +41,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/reinforcement/valueIterationAgents.py" />
         <option value="$PROJECT_DIR$/reinforcement/analysis.py" />
+        <option value="$PROJECT_DIR$/reinforcement/valueIterationAgents.py" />
         <option value="$PROJECT_DIR$/reinforcement/qlearningAgents.py" />
       </list>
     </option>
@@ -138,7 +137,7 @@
       <option name="presentableId" value="Default" />
       <updated>1552718923950</updated>
       <workItem from="1552718926259" duration="1360000" />
-      <workItem from="1553290732680" duration="4573000" />
+      <workItem from="1553290732680" duration="5609000" />
     </task>
     <task id="LOCAL-00001" summary="Reinforcement Learning Project starter code.">
       <created>1552719073751</created>
@@ -151,18 +150,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5933000" />
+    <option name="totallyTimeSpent" value="6969000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="597" y="0" width="683" height="800" extended-state="6" />
+    <frame x="523" y="0" width="757" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14976598" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32307693" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.30958903" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30958903" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -207,15 +206,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/reinforcement/valueIterationAgents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="92" column="30" lean-forward="true" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="30" />
+        <state relative-caret-position="225">
+          <caret line="78" column="21" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/reinforcement/qlearningAgents.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="215" column="36" selection-start-line="215" selection-start-column="36" selection-end-line="215" selection-end-column="36" />
+        <state relative-caret-position="220">
+          <caret line="106" column="60" selection-start-line="106" selection-start-column="60" selection-end-line="106" selection-end-column="60" />
           <folding>
             <element signature="e#668#686#0" expanded="true" />
           </folding>
